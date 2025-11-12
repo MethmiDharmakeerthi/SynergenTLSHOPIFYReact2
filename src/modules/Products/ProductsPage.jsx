@@ -1,9 +1,7 @@
-import React, {useState, useEffect, useMemo, useCallback} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import ProductCard from './ProductCard';
-import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import { Package } from 'lucide-react';
-
-// import { fetchProducts } from '../../services/productApi'; // API call abstraction
 
 const MOCK_PRODUCTS =[
     {id:1, name :'Wireless Headphones', price: 79.99, image:'🎧', category: 'Electronics'},
@@ -16,37 +14,33 @@ const MOCK_PRODUCTS =[
     {id:8, name :'Fitness Tracker', price: 89.99, image:'🏃‍♂️', category: 'Electronics'},
 ];
 
-//Defines the component. It receives the addToCart function, the current selectedCategory, and the setSelectedCategory setter function (all managed by a parent component, likely the one using useCart).
-const ProductsPage =({ addToCart, selectedCategory, setSelectedCategory })=> {
-    //Initializes a boolean state to track if data is currently being fetched.
-    const [products, setProducts] = useState ([]);
-    const [isLoading, setIsLoading] = useState (false);
+const ProductsPage = ({ addToCart, selectedCategory, setSelectedCategory }) => {
+    const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    //Runs once when the component mounts (because the dependency array is empty:
-    //Starts the loading state, then uses setTimeout to simulate a 1-second network delay for fetching data.
-    //Updates the products state with the mock data and hides the loading spinner.
     useEffect(() => {
         setIsLoading(true);
         setTimeout(() => {
             setProducts(MOCK_PRODUCTS);
             setIsLoading(false);
-            
-        },1000);
+        }, 1000);
     }, []);
 
-    //useMemo for memoizing categories and filtered list (Calculates and memorizes the unique list of product categories (plus 'All'). It only re-runs this calculation if the products list changes.)
-    //Filters the products list based on the selectedCategory. It only re-runs the filtering if either the products list or the selectedCategory changes.
-    const categories = useMemo(() => ['All', ...new Set(products.map(p => p.category))], [products]);
+    const categories = useMemo(() => 
+        ['All', ...new Set(products.map(p => p.category))], 
+        [products]
+    );
 
-    const filteredProducts = useMemo (() => 
-    selectedCategory === 'All'
-    ? products
-    : products.filter (p => p.category === selectedCategory),
-    [products, selectedCategory]);
+    const filteredProducts = useMemo(() => 
+        selectedCategory === 'All'
+            ? products
+            : products.filter(p => p.category === selectedCategory),
+        [products, selectedCategory]
+    );
 
-    if(isLoading){
+    if (isLoading) {
         return (
-            <div className = "col-span-3 min-h [500px] flex items-center justify-center"> 
+            <div className="col-span-3 min-h-[500px] flex items-center justify-center"> 
                 <LoadingSpinner />
             </div>
         );
@@ -54,25 +48,42 @@ const ProductsPage =({ addToCart, selectedCategory, setSelectedCategory })=> {
 
     return (
         <>
-            <div className = "mb-6 flex gap-2 flex-wrap">
+            {/* Category Filter Buttons */}
+            <div className="mb-6 flex gap-2 flex-wrap">
                 {categories.map(category => (
                     <button
                         key={category}
                         onClick={() => setSelectedCategory(category)}
                         className={`px-4 py-2 rounded-lg transition ${
                             selectedCategory === category 
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-gray-200 text-gray-700 hover:bg-gray-100'
+                                ? 'bg-blue-500 text-white'
+                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                         }`}
                     >
-                    {category}
+                        {category}
                     </button>
                 ))}
-
             </div>
+
+            {/* Products Grid */}
+            {filteredProducts.length === 0 ? (
+                <div className="col-span-3 text-center py-12">
+                    <Package className="w-16 h-16 mx-auto text-gray-300 mb-4" />
+                    <p className="text-gray-500 text-lg">No products found in this category</p>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredProducts.map(product => (
+                        <ProductCard 
+                            key={product.id} 
+                            product={product} 
+                            onAddToCart={addToCart}
+                        />
+                    ))}
+                </div>
+            )}
         </>
     );
-
 };
 
 export default ProductsPage;

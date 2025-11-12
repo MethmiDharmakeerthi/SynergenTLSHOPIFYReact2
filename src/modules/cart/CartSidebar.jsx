@@ -1,5 +1,5 @@
 import React from 'react';
-import CartItem from './CartItem';
+import CartItem from './components/CartItem';
 // This component is focused on the layout, totals, and iteration.
 export default function CartSidebar({ cart, cartTotal, removeFromCart, updateQuantity }) {
   const formattedTotal = cartTotal.toFixed(2);
