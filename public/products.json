@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "Classic Cotton Tee",
+    "price": 24.99,
+    "rating": 4.5,
+    "tags": ["apparel", "top", "cotton"],
+    "image": "https://via.placeholder.com/300x300.png?text=Classic+Tee",
+    "description": "A timeless classic. This 100% cotton tee is soft, breathable, and perfect for everyday wear."
+  },
+  {
+    "id": 2,
+    "title": "Leather Wallet",
+    "price": 49.99,
+    "rating": 4.8,
+    "tags": ["accessories", "leather"],
+    "image": "https://via.placeholder.com/300x300.png?text=Leather+Wallet",
+    "description": "Crafted from genuine full-grain leather, this bifold wallet has ample space for cards and cash."
+  },
+  {
+    "id": 3,
+    "title": "Running Shoes",
+    "price": 89.99,
+    "rating": 4.2,
+    "tags": ["apparel", "shoes", "sport"],
+    "image": "https://via.placeholder.com/300x300.png?text=Running+Shoes",
+    "description": "Lightweight and responsive, these running shoes are built for speed and comfort on any terrain."
+  },
+  {
+    "id": 4,
+    "title": "Noise-Cancelling Headphones",
+    "price": 199.99,
+    "rating": 4.7,
+    "tags": ["electronics", "audio"],
+    "image": "https://via.placeholder.com/300x300.png?text=Headphones",
+    "description": "Immerse yourself in sound. Active noise-cancellation and plush earcups for all-day comfort."
+  },
+  {
+    "id": 5,
+    "title": "Stainless Steel Water Bottle",
+    "price": 29.99,
+    "rating": 4.9,
+    "tags": ["accessories", "outdoors"],
+    "image": "https://via.placeholder.com/300x300.png?text=Water+Bottle",
+    "description": "Keep your drinks cold for 24 hours or hot for 12. 18/8 stainless steel, BPA-free."
+  },
+  {
+    "id": 6,
+    "title": "Wireless Mouse",
+    "price": 39.99,
+    "rating": 4.4,
+    "tags": ["electronics", "computer"],
+    "image": "https://via.placeholder.com/300x300.png?text=Wireless+Mouse",
+    "description": "Ergonomic wireless mouse with a precision optical sensor and long-lasting battery life."
+  }
+]

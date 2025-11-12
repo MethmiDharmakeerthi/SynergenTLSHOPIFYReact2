@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Mini Product Catalog (React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a solution for the "Task B — Front-End (React)" challenge. It's a simple product catalog UI built with React, Vite, and TypeScript.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+* Displays products from a static JSON file in a responsive grid.
+* Search by product title.
+* Sort by price (ascending/descending).
+* Filter by tags (multi-select).
+* Accessible modal for product details.
+* Simple client-side cart summary (total items and subtotal).
 
-### `npm start`
+## How to Run
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repo-url>
+    cd mini-catalog
+    ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2.  **Install dependencies:**
+    This project uses `npm` and requires `focus-trap-react` for modal accessibility.
+    ```bash
+    npm install
+    npm install focus-trap-react
+    ```
 
-### `npm test`
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4.  Open [http://localhost:5173](http://localhost:5173) (or as indicated in your terminal) to view the app.
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* `/public/products.json`: The static data source.
+* `/src/App.tsx`: The main component, responsible for state management (filters, cart, modal) and data fetching.
+* `/src/types.ts`: TypeScript interfaces for `Product` and `CartItem`.
+* `/src/hooks/useProducts.ts`: A custom hook to fetch and memoize the full product list and derive the set of all available tags.
+* `/src/components/`: Contains all reusable React components:
+    * `Controls.tsx`: The sidebar form with search, sort, and filter inputs.
+    * `CartSummary.tsx`: The sidebar component showing cart totals.
+    * `ProductList.tsx`: The main grid container for the product cards.
+    * `ProductCard.tsx`: A single product card (using `<button>` for accessibility).
+    * `ProductModal.tsx`: The accessible modal, which uses `focus-trap-react` and handles "Escape" key closure.
